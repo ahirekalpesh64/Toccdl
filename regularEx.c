@@ -3,32 +3,63 @@
 
 int main()
 {
+char re[20],str[20];
+int i,accept = 0;
 
-char str[100];int i,len;
-printf("Enter the binary string:");
-scanf("%99s",str);
+printf(" Enter the Regular Expression:");
+scanf("%s",re);
 
-len=strlen(str);
+printf("Enter Input String:");
+scanf("%s",str);
 
-if(len == 0)
+if(strcmp(re,"0")==0)
 {
-printf("string Rejected\n");
+if (strcmp(str,"0")==0)
+accept = 1;
+}
+else if(strcmp(re,"1")==0)
+{
+if(strcmp(str,"1")==0)
+accept = 1;
+}
+else if(strcmp(re,"0+1")==0)
+{
+if(strcmp(str,"0")==0 || strcmp(str,"1")==0)
+accept = 1;
+}
+else if(strcmp(re,"01")==0)
+{
+if(strcmp(str,"0")==0 || strcmp(str,"1")==0)
+accept = 1;
+}
+else if(strcmp(re,"0*")==0)
+{
+accept = 1;
+for(i=0;str[i]!='\0';i++)
+if(str[i]!='0')
+accept = 0;
+}
+else if(strcmp(re,"1*")==0)
+{
+accept = 1;
+for(i=0;str[i]!='\0';i++)
+if(str[i]!='1')
+accept = 0;
+}
+else
+{
+printf("REgular Expression Not Supporeted\n");
 return 0;
 }
 
-for (i=0;i<len;i++)
-{
-if (str[i]!='0' && str[i]!='1')
-{
-printf("Invalid input Enter Only 0 and 1\n");
-return 0;
-}
-}
+printf("\n Equivalent DFA Is generated for:%s\n",re);
 
-
-
-if(str[0]=='0' && str[len-1]=='1')
-  printf("String Accepted\n");
+if(accept)
+  printf("String Accpeted\n");
   else
-  printf("String Rejected\n");
+  printf("String REjected\n");
+  
+  return 0;
   }
+
+
